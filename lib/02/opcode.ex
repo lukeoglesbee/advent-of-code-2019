@@ -3,7 +3,7 @@ defmodule Opcode do
     res =
       Computer.from_file()
       |> Computer.run()
-      |> Computer.get(0)
+      |> Computer.get_by_value(0)
       |> IO.puts()
   end
 
@@ -18,11 +18,11 @@ defmodule Opcode do
       Enum.map(verbs, fn verb ->
         res =
           initial_state
-          |> Computer.update(1, noun)
-          |> Computer.update(2, verb)
+          |> Computer.update_by_value(1, noun)
+          |> Computer.update_by_value(2, verb)
           |> Computer.run()
 
-        if Computer.get(res, 0) == desired_output do
+        if Computer.get_by_value(res, 0) == desired_output do
           IO.puts("==============")
           IO.puts("noun: #{noun}")
           IO.puts("verb: #{verb}")
